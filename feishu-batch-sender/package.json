@@ -1,0 +1,10 @@
+{
+  "name": "feishu-batch-sender",
+  "version": "1.0.0",
+  "description": "Send multiple messages efficiently in one go to reduce tool usage.",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1"
+  }
+}

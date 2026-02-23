@@ -1,0 +1,10 @@
+{
+  "name": "feishu-file",
+  "version": "1.0.9",
+  "description": "Upload, download, and send files via Feishu APIs.",
+  "main": "send.js",
+  "dependencies": {
+    "commander": "^14.0.3",
+    "dotenv": "^17.2.3"
+  }
+}

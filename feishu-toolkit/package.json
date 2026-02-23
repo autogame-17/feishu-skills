@@ -1,0 +1,12 @@
+{
+  "name": "feishu-toolkit",
+  "version": "1.0.0",
+  "description": "Unified Feishu Toolkit (Image, Post, Doc) with zero external CLI dependencies.",
+  "main": "index.js",
+  "bin": {
+    "feishu-toolkit": "./index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
+  }
+}

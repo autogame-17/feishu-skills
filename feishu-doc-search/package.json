@@ -1,0 +1,10 @@
+{
+  "name": "feishu-doc-search",
+  "version": "1.0.0",
+  "description": "Search Feishu Docs/Wiki content",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1"
+  }
+}

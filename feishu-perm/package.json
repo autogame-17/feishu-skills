@@ -1,0 +1,7 @@
+{
+  "name": "feishu-perm",
+  "version": "1.0.0",
+  "description": "Feishu permission management for documents and files.",
+  "main": "index.js",
+  "dependencies": {}
+}

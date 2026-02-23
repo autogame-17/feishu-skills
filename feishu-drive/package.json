@@ -1,0 +1,13 @@
+{
+  "name": "feishu-drive",
+  "version": "1.0.0",
+  "description": "Feishu Drive Skill",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "commander": "^11.1.0",
+    "dotenv": "^16.4.5"
+  }
+}

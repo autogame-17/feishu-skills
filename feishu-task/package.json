@@ -1,0 +1,9 @@
+{
+  "name": "feishu-task",
+  "version": "1.0.0",
+  "description": "Manage Feishu (Lark) Tasks via API.",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}

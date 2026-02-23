@@ -1,0 +1,9 @@
+[
+  {
+    "id": "exegv9",
+    "url": "https://news.ycombinator.com/rss",
+    "name": "Hacker News",
+    "target": "${MASTER_ID}",
+    "addedAt": "2026-02-10T05:41:21.602Z"
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "name": "feishu-wiki",
+  "version": "1.0.0",
+  "description": "Feishu Wiki (Knowledge Base) Management Skill",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js --help"
+  },
+  "keywords": ["feishu", "lark", "wiki", "knowledge", "management"],
+  "author": "OpenClaw",
+  "license": "ISC"
+}
