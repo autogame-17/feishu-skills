@@ -1,6 +1,6 @@
 {
-  "name": "feishu-native-emoji",
-  "version": "1.0.0",
-  "description": "Feishu native emoji mapping resources.",
-  "main": "emoji_list.txt"
+	"name": "feishu-native-emoji",
+	"version": "2.0.0",
+	"description": "Feishu native emoji mapping: emoji_type codes, Chinese names, Unicode conversion table.",
+	"main": "unicode_mapping.json"
 }
