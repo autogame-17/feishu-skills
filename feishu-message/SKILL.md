@@ -1,62 +1,76 @@
-# Feishu Message Skill
+---
+name: feishu-message
+description: Unified CLI for Feishu (Lark) messaging operations including fetching messages by ID, sending audio voice bubbles, creating group chats, listing pinned messages, and adding emoji reactions.
+---
 
-A unified toolkit for Feishu messaging operations, providing a single CLI entry point for common tasks.
+# feishu-message
 
-## Usage
+Unified CLI for Feishu messaging -- fetch, send audio, create chats, list pins, and add reactions through a single entry point.
 
-Use the unified CLI via `index.js`:
+## Prerequisites
+
+- `feishu-common` installed with valid `FEISHU_APP_ID` and `FEISHU_APP_SECRET`.
+
+## Commands
+
+All commands use the unified CLI:
+
 ```bash
 node skills/feishu-message/index.js <command> [options]
 ```
 
-## Commands
+### Get Message
 
-### 1. Get Message (`get`)
-Fetch message content by ID. Supports recursive fetching for merged messages.
+Fetch message content by ID. Use `--recursive` for merged/forwarded messages.
+
 ```bash
 node skills/feishu-message/index.js get <message_id> [--raw] [--recursive]
 ```
-Example:
+
+### Send Audio
+
+Send an audio file as a voice bubble to a user or chat.
+
 ```bash
-node skills/feishu-message/index.js get om_12345 --recursive
+node skills/feishu-message/index.js send-audio --target <ou_xxx|oc_xxx> --file <path> [--duration <ms>]
 ```
 
-### 2. Send Audio (`send-audio`)
-Send an audio file as a voice bubble.
-```bash
-node skills/feishu-message/index.js send-audio --target <id> --file <path> [--duration <ms>]
-```
 - `--target`: User OpenID (`ou_`) or ChatID (`oc_`).
 - `--file`: Path to audio file (mp3/wav/etc).
 - `--duration`: (Optional) Duration in ms.
 
-### 3. Create Group Chat (`create-chat`)
+### Create Group Chat
+
 Create a new group chat with specified users.
+
 ```bash
 node skills/feishu-message/index.js create-chat --name "Project Alpha" --users "ou_1" "ou_2" --desc "Description"
 ```
 
-### 4. List Pins (`list-pins`)
+### List Pins
+
 List pinned messages in a chat.
+
 ```bash
 node skills/feishu-message/index.js list-pins <chat_id>
 ```
 
-### 5. Add Reaction (`reaction`)
+### Add Reaction
+
 Add an emoji reaction to a message.
+
 ```bash
 node skills/feishu-message/reaction.js --message-id <msg_id> --type <emoji_type>
 ```
-Common types: `THUMBSUP` (default), `HEART`, `LAUGH`, `WOW`, `SAD`, `ANGRY`.
+
+Supported types: `THUMBSUP` (default), `HEART`, `LAUGH`, `WOW`, `SAD`, `ANGRY`.
 
 ## Legacy Scripts
-Standalone scripts are still available for backward compatibility:
-- `get.js`
-- `send-audio.js`
-- `create_chat.js`
-- `list_pins_v2.js`
+
+Standalone scripts remain available for backward compatibility: `get.js`, `send-audio.js`, `create_chat.js`, `list_pins_v2.js`.
 
 ## Dependencies
+
 - axios
 - form-data
 - music-metadata

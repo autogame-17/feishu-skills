@@ -1,29 +1,44 @@
-# feishu-common Skill
+---
+name: feishu-common
+description: Shared Feishu (Lark) authentication and API request helper providing tenant token acquisition with caching, automatic retry with timeout handling, and authenticated request wrappers with token refresh.
+---
 
-## Description
-Shared Feishu authentication and API helper for OpenClaw Feishu skills.
+# feishu-common
 
-Provides:
-- Tenant token acquisition and cache
-- Retry and timeout handling
-- Authenticated request wrapper with token refresh
+Shared authentication and API helper for all OpenClaw Feishu skills. Install this skill first -- every other `feishu-*` skill depends on it.
 
-## Install Requirement
-Install this skill before installing or running dependent Feishu skills.
+## Prerequisites
+
+Set these environment variables before using any Feishu skill:
+
+```bash
+export FEISHU_APP_ID=cli_xxxxx
+export FEISHU_APP_SECRET=xxxxx
+```
 
 ## Usage
-Dependent skills should import from `feishu-common`:
+
+Import the shared helpers in any dependent skill:
 
 ```javascript
 const { getToken, fetchWithRetry, fetchWithAuth } = require("../feishu-common/index.js");
 ```
 
-Compatibility alias is also available:
+### Workflow
+
+1. **Authenticate** -- `getToken()` acquires a tenant access token and caches it locally, refreshing automatically on expiry.
+2. **Make requests** -- `fetchWithAuth(url, options)` adds the `Authorization` header and handles token refresh on 401 responses.
+3. **Handle failures** -- `fetchWithRetry(url, options)` wraps fetch with configurable retry count and timeout.
+
+### Compatibility Alias
+
+A legacy import path is available for backward compatibility:
 
 ```javascript
 const { getToken, fetchWithAuth } = require("../feishu-common/feishu-client.js");
 ```
 
 ## Files
-- `index.js`: Main implementation.
-- `feishu-client.js`: Compatibility alias to `index.js`.
+
+- `index.js` -- Main implementation (token cache, retry logic, authenticated fetch).
+- `feishu-client.js` -- Compatibility alias that re-exports from `index.js`.
