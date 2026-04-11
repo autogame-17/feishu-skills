@@ -136,52 +136,37 @@ async function fetchWithAuth(url, options = {}) {
 }
 
 // --- Simplified Export Wrappers for specific formats ---
-// These are simple wrappers around fetchWithAuth.
-// For complex logic (markdown parsing), use specialized skills.
 
-async function sendText(receive_id, text) {
-    const url = `https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id`;
-    const body = {
-        receive_id,
-        msg_type: 'text',
-        content: JSON.stringify({ text })
-    };
+function resolveReceiveIdType(receiveId) {
+    if (typeof receiveId !== 'string') return 'open_id';
+    if (receiveId.startsWith('oc_')) return 'chat_id';
+    if (receiveId.startsWith('ou_')) return 'open_id';
+    if (receiveId.includes('@')) return 'email';
+    return 'open_id';
+}
+
+async function sendMessage(receive_id, msg_type, content) {
+    const idType = resolveReceiveIdType(receive_id);
+    const url = `https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=${idType}`;
+    const body = { receive_id, msg_type, content: typeof content === 'string' ? content : JSON.stringify(content) };
     const res = await fetchWithAuth(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
     });
     return await res.json();
+}
+
+async function sendText(receive_id, text) {
+    return sendMessage(receive_id, 'text', JSON.stringify({ text }));
 }
 
 async function sendPost(receive_id, postContent) {
-    const url = `https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id`;
-    const body = {
-        receive_id,
-        msg_type: 'post',
-        content: JSON.stringify(postContent)
-    };
-    const res = await fetchWithAuth(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-    });
-    return await res.json();
+    return sendMessage(receive_id, 'post', JSON.stringify(postContent));
 }
 
 async function sendCard(receive_id, cardContent) {
-    const url = `https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id`;
-    const body = {
-        receive_id,
-        msg_type: 'interactive',
-        content: JSON.stringify(cardContent)
-    };
-    const res = await fetchWithAuth(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-    });
-    return await res.json();
+    return sendMessage(receive_id, 'interactive', JSON.stringify(cardContent));
 }
 
-module.exports = { getToken, fetchWithRetry, fetchWithAuth, sendText, sendPost, sendCard };
+module.exports = { getToken, fetchWithRetry, fetchWithAuth, sendMessage, sendText, sendPost, sendCard, resolveReceiveIdType };
